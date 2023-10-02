@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <!-- Bulma and DataTables CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bulma.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/dataTables.css')}}">
+    <!-- DataTables JS -->
+    <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script> 
+    <script src="{{url_for('static', filename='js/dataTables.js')}}"></script>
+    <script defer src="{{url_for('static', filename='js/friconix.js')}}"> </script> 
+
+    <style>
+      body {
+
+background: #00C9FF;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #92FE9D, #00C9FF);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #92FE9D, #00C9FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+     
+
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
+
+  </head>
+  <body>
+
+
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="{{ url_for('main.index') }}">
+          <img src="{{url_for('static', filename='img/stock-logo-white.png')}}" height="28">
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        {% if current_user.is_authenticated %}
+        <div class="navbar-start">
+          <a class="navbar-item" href="{{ url_for('main.index') }}">
+            <i class="fi-xnsuxl-house-solid mr-1"></i> Home
+          </a>
+          <a class="navbar-item">
+            <i class="fi-xnsuxl-file-docx-solid mr-1"></i> Documentation
+          </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              <i class="fi-xwsuxl-plus-solid"></i> More
+            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                About
+              </a>
+              <a class="navbar-item">
+                Jobs
+              </a>
+              <a class="navbar-item">
+                Contact
+              </a>
+              <hr class="navbar-divider">
+              <a class="navbar-item">
+                Report an issue
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-light" href="{{url_for('auth.logout')}}">
+                <i class="fi-xnsuxl-sign-out-solid mr-1"></i> Log out
+              </a>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+               <a class="button is-primary" href="{{url_for('auth.signup')}}">
+                <strong><i class="fi-xnsuxl-user-plus-solid mr-1"></i> Sign up</strong>
+              </a>
+              <a class="button is-light" href="{{url_for('auth.login')}}">
+                <i class="fi-xwsuxl-sign-in-solid mr-1"></i> Log in
+              </a>
+            </div>
+          </div>
+        {% endif %}
+        
+
+      </div>
+    </nav>  
+
+ 
+  <div class="container">
+   
+    {% block content %}
+
+    {% endblock %}
+
+  </div>
+  
+
+  </body>
+</html>
